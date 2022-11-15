@@ -1,0 +1,6 @@
+pandas==1.1.5
+protobuf==4.21.9
+pygsheets==2.0.5
+PyYAML==6.0
+requests==2.25.1
+google-auth==2.14.1
