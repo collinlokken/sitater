@@ -4,3 +4,6 @@ This slack app was created to archive messages from the #sitater-med-marcus slac
 
 ## Step by step
 To archive messages, just run the `sitater.py` script.
+
+## Config
+The `config.yaml` file is intentionally left out as it contians credentials. HMU.
