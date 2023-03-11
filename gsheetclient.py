@@ -11,8 +11,12 @@ class GoogleSheetClient():
         self.authorize()
 
     def dictToSheet(self, dict, sheet):
-        df = pd.DataFrame(dict)
-        self.sheets[sheet].set_dataframe(df, (1,1))
+        df_slack = pd.DataFrame(dict)
+        old_sheet = self.sheets[sheet]
+        df_sheet = old_sheet.get_as_df()
+        df_new = pd.concat([df_slack, df_sheet]).drop_duplicates().reset_index(drop=True)
+        print(df_new)
+        self.sheets[sheet].set_dataframe(df_new, (1,1))
 
     def authorize(self):
         file = open("config.yaml", "r")

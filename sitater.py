@@ -41,15 +41,16 @@ class SlackClient():
 
     def extract_sitater(self):
         params = {
-            "channel": self.sitater_channel_id
+            "channel": self.sitater_channel_id,
+            "limit":1000
         }
         res = requests.get(f'{self.base}/conversations.history', params=params, headers=self.headers)
         sitater = [sitat for sitat in res.json()["messages"] if not sitat.get("subtype")]
         for sitat in sitater:
             user_name = self.get_user_name_from_id(sitat["user"])
             text = self.replace_ats_in_text(sitat["text"])
-            reactions = [reaction for reaction in sitat["reactions"]]
-            count = [] # list with reactions per emoji
+            reactions = [reaction for reaction in sitat.get("reactions",[])]
+            count = [0] # list with reactions per emoji
             user_reactions = [] # list with users reacted to post
             for reaction in reactions:
                 count.append(reaction["count"])
